@@ -1,0 +1,50 @@
+﻿@model List<ContatoModel>
+@{
+    ViewData["Title"] = "Listagem de Contatos";
+}
+
+<main class="text-center">
+
+    <h1 class="display-5 text-light">Lista de Contatos</h1>
+    <br/>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-center m-3">
+        <a class="btn btn-secondary" role="button" asp-controller="Contato" asp-action="Criar">Novo Contato</a>
+    </div>
+
+    <br/>
+    <table class="table table-dark table-hover">
+        <thead>
+            <tr class="table-dark">
+                <th class="table-dark">ID</th>
+                <th class="table-dark">Nome</th>
+                <th class="table-dark">Email</th>
+                <th class="table-dark">Número</th>
+                <th class="table-dark"></th>
+            </tr>
+        </thead>
+        <tbody>
+               @if(Model != null && Model.Any())
+               {
+                   foreach( ContatoModel contato in Model)
+                   {
+                    <tr class="table-dark">
+                        <td class="table-dark">@contato.Id</td>
+                        <td class="table-dark">@contato.Nome</td>
+                        <td class="table-dark">@contato.Email</td>
+                        <td class="table-dark">@contato.Numero</td>
+                        <td class="table-dark">
+                            <div class="btn-group me-1" role="group">
+                                <a class="btn btn-secondary" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="Editar">Editar</a>
+                                <a class="btn btn-warning" asp-route-id="@contato.Id" asp-controller="Contato" asp-action="ApagarConfirm">Apagar</a>
+                            </div>
+                        </td>
+                    </tr>
+                   }
+               }
+
+        </tbody>
+
+    </table>
+
+</main>
+
